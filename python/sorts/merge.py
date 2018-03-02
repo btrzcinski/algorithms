@@ -1,2 +1,2 @@
 def sort(input):
-    pass
+    return input
