@@ -1,31 +1,32 @@
 def sort(input):
-    if len(input) <= 1:
-        return input
-    elif len(input) == 2:
-        if input[0] > input[1]:
-            return [input[1], input[0]]
-        else:
-            return input
+    recursive_sort(input, 0, len(input) - 1)
 
-    pivot = partition(input)
-    left, right = input[:pivot+1], input[pivot+1:]
+def recursive_sort(input, low, high):
+    if low >= high:
+        return
+    elif low == high - 1:
+        if input[low] > input[high]:
+            input[low], input[high] = input[high], input[low]
+        return
 
-    return sort(left) + sort(right)
+    pivot = partition(input, low, high)
+    recursive_sort(input, low, pivot)
+    recursive_sort(input, pivot + 1, high)
 
-def partition(input):
-    pivot_index = len(input)/2
-    input[0], input[pivot_index] = input[pivot_index], input[0]
+def partition(input, low, high):
+    pivot_index = low + ((high - low + 1) / 2)
+    input[low], input[pivot_index] = input[pivot_index], input[low]
 
-    i, j = 1, len(input) - 1
+    i, j = low + 1, high
     while i < j:
-        if input[i] <= input[0]:
+        if input[i] <= input[low]:
             i += 1
         else:
             input[i], input[j] = input[j], input[i]
             j -= 1
     
-    if input[i] > input[0]:
+    if input[i] > input[low]:
         i -= 1
-    input[0], input[i] = input[i], input[0]
+    input[low], input[i] = input[i], input[low]
 
     return i

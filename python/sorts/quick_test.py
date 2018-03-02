@@ -6,29 +6,29 @@ import quick
 class QuickSortTests(unittest.TestCase):
 
     def setUp(self):
-        self.input = list(range(10))
+        self.actual = list(range(10))
 
     def test_random(self):
-        random.shuffle(self.input)
+        random.shuffle(self.actual)
         
-        actual = quick.sort(self.input)
-        self.assertEqual(list(sorted(actual)), actual)
+        quick.sort(self.actual)
+        self.assertEqual(list(sorted(self.actual)), self.actual)
 
     def test_sorted(self):
-        actual = quick.sort(self.input)
-        self.assertEqual(list(sorted(actual)), actual)
+        quick.sort(self.actual)
+        self.assertEqual(list(sorted(self.actual)), self.actual)
 
     def test_oneoff(self):
-        self.input[0], self.input[1] = self.input[1], self.input[0]
+        self.actual[0], self.actual[1] = self.actual[1], self.actual[0]
 
-        actual = quick.sort(self.input)
-        self.assertEqual(list(sorted(actual)), actual)
+        quick.sort(self.actual)
+        self.assertEqual(list(sorted(self.actual)), self.actual)
 
     def test_reversed(self):
-        self.input.reverse()
+        self.actual.reverse()
 
-        actual = quick.sort(self.input)
-        self.assertEqual(list(sorted(actual)), actual)
+        quick.sort(self.actual)
+        self.assertEqual(list(sorted(self.actual)), self.actual)
 
 if __name__ == '__main__':
     unittest.main()
